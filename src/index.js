@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import registerServiceWorker from "./registerServiceWorker";
 import Provider from "./Provider";
-import User from "./User";
+import Products from "./containers/Products";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
         <Provider>
-          <User />
+          <Products />
         </Provider>
       </React.Fragment>
     );

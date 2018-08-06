@@ -1,39 +1,71 @@
 import React from "react";
 import { Context } from "../Context";
+import axios from "axios";
+
+const baseUrl = "http://tech.work.co/shopping-cart/products.json";
 
 class Provider extends React.Component {
-  state = {
-    users: [
-      { name: "Diego", email: "dsaantos1995@gmail.com", idade: 23 },
-      { name: "Duda", email: "eduarda.ama73@gmail.com", idade: 20 }
-    ],
-    deleteItem: item => this.deleteItem(item),
-    addItem: item => this.addItem(item),
-    updateItem: item => this.updateItem(item)
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      cart: [],
+      deleteItem: item => this.deleteItem(item),
+      updateItem: (item, type) => this.updateItem(item, type),
+      loading: true
+    };
+  }
 
   deleteItem = item => {
-    const users = this.state.users.filter(user => user.name !== item.name);
-    this.setState({
-      users
+    const cart = this.state.cart.filter(
+      cartItem => cartItem.id !== item.product.id
+    );
+
+    this.setState({ cart });
+  };
+
+  updateItem = (item, type) => {
+    const cart = this.state.cart;
+
+    cart.map(itemCart => {
+      if (itemCart.id === item.product.id) {
+        if (type === "more") {
+          item.product.inventory++;
+        } else {
+          item.product.inventory--;
+        }
+      }
+      return;
     });
-    console.log("deleteitem: ", item);
+
+    this.setState({ cart });
   };
 
-  addItem = item => {
-    console.log("addItem: ", item);
-  };
-
-  updateItem = item => {
-    console.log("updateItem:", item);
-  };
+  componentDidMount() {
+    axios(baseUrl)
+      .then(response => {
+        if (!!response) {
+          return response;
+        }
+      })
+      .then(response => {
+        const cart = response.data;
+        this.setState({ cart, loading: false });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  }
 
   render() {
-    return (
-      <Context.Provider value={this.state}>
-        {this.props.children}
-      </Context.Provider>
-    );
+    const { cart } = this.state;
+    if (!!cart) {
+      return (
+        <Context.Provider value={this.state}>
+          {this.props.children}
+        </Context.Provider>
+      );
+    }
   }
 }
 
