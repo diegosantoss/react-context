@@ -30,6 +30,12 @@ export default props => {
           >
             Delete
           </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => props.state.addItem(props)}
+          >
+            Add
+          </button>
         </div>
       </div>
     </section>

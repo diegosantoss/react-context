@@ -7,7 +7,7 @@ export default () => {
     <React.Fragment>
       <Context.Consumer>
         {state => {
-          return state.cart.map((product, index) => {
+          return state.allProducts.map((product, index) => {
             return <Product key={index} product={product} state={state} />;
           });
         }}

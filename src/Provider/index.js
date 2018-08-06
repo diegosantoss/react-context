@@ -9,19 +9,26 @@ class Provider extends React.Component {
     super();
 
     this.state = {
+      allProducts: [],
       cart: [],
-      deleteItem: item => this.deleteItem(item),
+      addItem: item => this.addItem(item),
       updateItem: (item, type) => this.updateItem(item, type),
+      deleteItem: item => this.deleteItem(item),
       loading: true
     };
   }
 
-  deleteItem = item => {
-    const cart = this.state.cart.filter(
-      cartItem => cartItem.id !== item.product.id
-    );
+  addItem = item => {
+    const cart = this.state.cart;
+    const checkCart = cart.some(itemCart => itemCart.id === item.product.id);
 
-    this.setState({ cart });
+    if (!!checkCart) {
+      return;
+    } else {
+      cart.push(item.product);
+      this.setState({ cart });
+      return;
+    }
   };
 
   updateItem = (item, type) => {
@@ -38,7 +45,15 @@ class Provider extends React.Component {
       return;
     });
 
-    this.setState({ cart });
+    return this.setState({ cart });
+  };
+
+  deleteItem = item => {
+    const cart = this.state.cart.filter(
+      cartItem => cartItem.id !== item.product.id
+    );
+
+    return this.setState({ cart });
   };
 
   componentDidMount() {
@@ -49,8 +64,8 @@ class Provider extends React.Component {
         }
       })
       .then(response => {
-        const cart = response.data;
-        this.setState({ cart, loading: false });
+        const allProducts = response.data;
+        this.setState({ allProducts, loading: false });
       })
       .catch(err => {
         console.log(err.message);
@@ -58,8 +73,8 @@ class Provider extends React.Component {
   }
 
   render() {
-    const { cart } = this.state;
-    if (!!cart) {
+    const { allProducts } = this.state;
+    if (!!allProducts) {
       return (
         <Context.Provider value={this.state}>
           {this.props.children}
