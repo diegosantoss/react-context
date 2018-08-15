@@ -1,0 +1,53 @@
+header {
+  width: 100%;
+  background: #ff3333;
+}
+
+.header__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__content__logo {
+  display: contents;
+}
+.header__content__logo a {
+  width: 100%;
+  padding: 0;
+  height: 100%;
+  margin: 0;
+  display: contents;
+}
+
+.header__content__logo a img {
+  width: 80px;
+}
+
+.header__content__nav {
+  position: relative;
+}
+
+.header__content__nav a {
+}
+
+.header__content__nav a i {
+  font-size: 3rem;
+  color: #fff;
+}
+
+.header__content__nav a span {
+  color: #fff;
+  font-size: 1rem;
+  background: #000;
+  width: 18px;
+  height: 18px;
+  line-height: 1.7;
+  text-align: center;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0px;
+}

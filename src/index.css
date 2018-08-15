@@ -1,0 +1,49 @@
+@import "./reset.css";
+
+:root {
+}
+
+html,
+body {
+  font-size: 10px;
+  font-family: "Montserrat", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+#reactContext {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  padding: 50px 0;
+}
+
+.content {
+  width: 90%;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.button {
+  background: transparent;
+  border: 1px #000000 solid;
+  border-radius: 3px;
+  padding: 7px 20px;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:active,
+.button:visited {
+  background: #000000;
+  color: #fff;
+}

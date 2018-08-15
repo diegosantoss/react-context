@@ -1,0 +1,14 @@
+footer {
+  width: 100%;
+  background: #f0f0f0;
+}
+
+.footer__content {
+  box-sizing: border-box;
+  padding: 17px 0px;
+  text-align: center;
+}
+
+.footer__content h2 {
+  font-size: 1.6rem;
+}

@@ -33,27 +33,25 @@ class Provider extends React.Component {
 
   updateItem = (item, type) => {
     const cart = this.state.cart;
-
     cart.map(itemCart => {
-      if (itemCart.id === item.product.id) {
+      if (itemCart.id === item.id) {
         if (type === "more") {
-          item.product.inventory++;
+          return itemCart.inventory++;
         } else {
-          item.product.inventory--;
+          return itemCart.inventory--;
         }
       }
-      return;
     });
 
     return this.setState({ cart });
   };
 
   deleteItem = item => {
-    const cart = this.state.cart.filter(
-      cartItem => cartItem.id !== item.product.id
-    );
+    const cart = this.state.cart.filter(cartItem => cartItem.id !== item.id);
 
-    return this.setState({ cart });
+    this.setState({ cart });
+
+    return "";
   };
 
   componentDidMount() {
