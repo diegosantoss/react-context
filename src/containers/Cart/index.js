@@ -1,13 +1,16 @@
 import React from "react";
 import "./index.css";
 import { Context } from "../../Context";
-import store from "store";
+import { Helmet } from "react-helmet";
 import Cart from "../../components/Cart";
 import NoCart from "../../components/Cart/NoCart";
 
 export default () => {
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Cart</title>
+      </Helmet>
       <Context.Consumer>
         {state => {
           const cartLength = state.cart.length;

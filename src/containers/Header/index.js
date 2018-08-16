@@ -1,7 +1,6 @@
 import React from "react";
 import { Context } from "../../Context";
 import { Link } from "react-router-dom";
-import store from "store";
 import "./index.css";
 
 export default () => {

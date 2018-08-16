@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Products from "../Products";
 import "./index.css";
 
-export default () => {
-  return <Products />;
-};
+export default () => (
+  <React.Fragment>
+    <Helmet>
+      <title>REACT CONTEXT - Work.co API</title>
+    </Helmet>
+    <Products />
+  </React.Fragment>
+);
