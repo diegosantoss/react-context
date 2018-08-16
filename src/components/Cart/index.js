@@ -10,22 +10,26 @@ export default props => {
         </p>
       </section>
       <section className="cart_content_item_button">
-        <p>
-          <button onClick={() => props.state.updateItem(props.item, "less")}>
-            -
-          </button>
-          {props.item.inventory}
-          <button onClick={() => props.state.updateItem(props.item, "more")}>
-            +
-          </button>
-        </p>
         <button
-          className="product__button button"
-          onClick={() => props.state.deleteItem(props.item)}
+          className="cart__button button"
+          onClick={() => props.state.updateItem(props.item, "less")}
         >
-          Delete
+          -
+        </button>
+        <h3>{props.item.inventory}</h3>
+        <button
+          className="cart__button button"
+          onClick={() => props.state.updateItem(props.item, "more")}
+        >
+          +
         </button>
       </section>
+      <button
+        className="cart__button__delete button"
+        onClick={() => props.state.deleteItem(props.item)}
+      >
+        X
+      </button>
     </section>
   );
 };

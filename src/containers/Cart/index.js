@@ -3,6 +3,7 @@ import "./index.css";
 import { Context } from "../../Context";
 import store from "store";
 import Cart from "../../components/Cart";
+import NoCart from "../../components/Cart/NoCart";
 
 export default () => {
   return (
@@ -11,13 +12,15 @@ export default () => {
         {state => {
           const cartLength = state.cart.length;
           return (
-            <section className="cart__content">
-              <section className="content">
-                {cartLength >= 1
-                  ? state.cart.map((cartItem, index) => {
-                      return <Cart state={state} item={cartItem} />;
-                    })
-                  : "not"}
+            <section className="cart__container">
+              <section className="cart__content content">
+                {cartLength >= 1 ? (
+                  state.cart.map((cartItem, index) => {
+                    return <Cart state={state} item={cartItem} />;
+                  })
+                ) : (
+                  <NoCart />
+                )}
               </section>
             </section>
           );
