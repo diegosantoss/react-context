@@ -10,7 +10,7 @@ export default props => {
 
       <button
         className="product__button button"
-        onClick={() => props.state.addItem(props)}
+        onClick={() => props.state.checkFunc({ props, type: "FUNC_ADD_ITEM" })}
       >
         Add
       </button>

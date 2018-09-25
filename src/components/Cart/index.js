@@ -26,7 +26,9 @@ export default props => {
       </section>
       <button
         className="cart__button__delete button"
-        onClick={() => props.state.deleteItem(props.item)}
+        onClick={() =>
+          props.state.checkFunc({ props, type: "FUNC_DELETE_ITEM" })
+        }
       >
         X
       </button>

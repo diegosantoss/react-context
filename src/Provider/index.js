@@ -1,5 +1,6 @@
 import React from "react";
 import { Context } from "../Context";
+import { FUNC_ADD_ITEM, FUNC_DELETE_ITEM } from "../Actions";
 import axios from "axios";
 
 const baseUrl = "http://tech.work.co/shopping-cart/products.json";
@@ -11,24 +12,30 @@ class Provider extends React.Component {
     this.state = {
       allProducts: [],
       cart: [],
-      addItem: item => this.addItem(item),
+      checkFunc: props => this.checkFunc(props),
       updateItem: (item, type) => this.updateItem(item, type),
-      deleteItem: item => this.deleteItem(item),
       loading: true
     };
   }
 
-  addItem = item => {
-    const cart = this.state.cart;
-    const checkCart = cart.some(itemCart => itemCart.id === item.product.id);
+  checkFunc = props => {
+    switch (props.type) {
+      case "FUNC_DELETE_ITEM":
+        this.updateState(FUNC_DELETE_ITEM({ props, ...this.state }));
+        break;
 
-    if (!!checkCart) {
-      return;
-    } else {
-      cart.push(item.product);
-      this.setState({ cart });
-      return;
+      case "FUNC_ADD_ITEM":
+        this.updateState(FUNC_ADD_ITEM({ props, ...this.state }));
+        break;
+
+      default:
+        break;
     }
+  };
+
+  updateState = newState => {
+    newState = delete newState.props;
+    this.setState({ ...newState });
   };
 
   updateItem = (item, type) => {
@@ -44,14 +51,6 @@ class Provider extends React.Component {
     });
 
     return this.setState({ cart });
-  };
-
-  deleteItem = item => {
-    const cart = this.state.cart.filter(cartItem => cartItem.id !== item.id);
-
-    this.setState({ cart });
-
-    return "";
   };
 
   componentDidMount() {
